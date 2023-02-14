@@ -13,8 +13,16 @@ import java.awt.image.BufferStrategy;
 
         private int mousey = 0;
 
+        private int randomx;
+
+        private int randomy;
+
         public animation() {
             setSize(600,400);
+            randomx = (int)(Math.random() * this.getWidth());
+
+            randomy = (int)(Math.random() * this.getHeight());
+
             JFrame frame = new JFrame();
             frame.add(this);
             frame.addKeyListener(new MyKeyListener());
@@ -45,6 +53,7 @@ import java.awt.image.BufferStrategy;
 //            g.clearRect(0,0,getWidth(),getHeight());
             g.clearRect(0,0,getWidth(),getHeight());
             g.fillOval(mousex,mousey, 30, 30);
+            g.fillRect(randomx,randomy,50,50);
         }
 
         private void update() {
