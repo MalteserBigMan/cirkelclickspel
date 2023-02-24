@@ -13,15 +13,22 @@ import java.awt.image.BufferStrategy;
 
         private int mousey = 0;
 
-        private int randomx;
+        private int panelwidth = getWidth();
 
-        private int randomy;
+        private int panelheight = getHeight();
+
+//        private int randomx;
+
+//        private int randomy;
+
+        private Rectangle hitbox;
 
         public animation() {
             setSize(600,400);
-            randomx = (int)(Math.random() * this.getWidth());
+//            randomx = (int)(Math.random() * this.getWidth());
 
-            randomy = (int)(Math.random() * this.getHeight());
+//            randomy = (int)(Math.random() * this.getHeight());
+            hitbox = new Rectangle((int)(Math.random() * this.getWidth()), (int)(Math.random() * this.getHeight()), 50,50);
 
             JFrame frame = new JFrame();
             frame.add(this);
@@ -52,8 +59,10 @@ import java.awt.image.BufferStrategy;
         public void draw(Graphics g) {
 //            g.clearRect(0,0,getWidth(),getHeight());
             g.clearRect(0,0,getWidth(),getHeight());
+            g.setColor(new Color(0x8C0E98));
+            g.fillRect(hitbox.x,hitbox.y, hitbox.width, hitbox.height);
+            g.setColor(new Color(0xBD0D0D));
             g.fillOval(mousex,mousey, 30, 30);
-            g.fillRect(randomx,randomy,50,50);
         }
 
         private void update() {
@@ -118,6 +127,10 @@ import java.awt.image.BufferStrategy;
 
             @Override
             public void mouseClicked(MouseEvent e) {
+                if (hitbox.contains(mousex,mousey)) {
+                    hitbox.y = (int)(Math.random() * 350);
+                    hitbox.x = (int)(Math.random() * 550);
+                }
             }
 
             @Override
