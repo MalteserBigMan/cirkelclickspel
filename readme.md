@@ -7,3 +7,10 @@ Ifall jag har tid över kan jag göra något poängsystem som visar hur många c
 
         #logg Arbete
 Jag har gjort "muspekaren", alltså cirkeln som följer musen. Jag har även gjort en rektangel som slumpmässigt dyker upp på skärmen.
+
+
+Jag har gjort så att man kan klicka på cirkeln, den försvinner och kommer upp på ett annat ställe
+
+Jag har lagt till en "score" högst upp i höger och ändrat färger
+
+Jag har gjort så att om man inte klickar på kuben i tid försvinner den och kommer tillbaka på ett annat ställe.

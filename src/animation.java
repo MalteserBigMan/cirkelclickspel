@@ -3,11 +3,15 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferStrategy;
 
+
+
     public class animation extends Canvas implements Runnable{
         private BufferStrategy bs;
 
         private boolean running = false;
         private Thread thread;
+
+        private int counter = 0;
 
         private int mousex = 0;
 
@@ -22,7 +26,7 @@ import java.awt.image.BufferStrategy;
 //        private int randomy;
 
         private Rectangle hitbox;
-
+        private int time = 0;
         public animation() {
             setSize(600,400);
 //            randomx = (int)(Math.random() * this.getWidth());
@@ -41,6 +45,7 @@ import java.awt.image.BufferStrategy;
             frame.setVisible(true);
         }
 
+
         public void render() {
             bs = getBufferStrategy();
             if (bs == null) {
@@ -57,15 +62,19 @@ import java.awt.image.BufferStrategy;
         }
 
         public void draw(Graphics g) {
-//            g.clearRect(0,0,getWidth(),getHeight());
             g.clearRect(0,0,getWidth(),getHeight());
+            g.setColor(new Color(0x000000));
+            g.fillRect(0, 0, getWidth(), getHeight());
             g.setColor(new Color(0x8C0E98));
             g.fillRect(hitbox.x,hitbox.y, hitbox.width, hitbox.height);
             g.setColor(new Color(0xBD0D0D));
             g.fillOval(mousex,mousey, 30, 30);
+            g.drawString("Score: "+counter, 500,20);
         }
 
         private void update() {
+            time++;
+            disappear();
         }
 
         public static void main(String[] args) {
@@ -108,7 +117,16 @@ import java.awt.image.BufferStrategy;
             }
             stop();
         }
+        public void disappear(){
+            if (time == 30){
+                time = 0;
+                hitbox.x = (int)(Math.random()*550);
+                hitbox.y = (int)(Math.random()*350);
 
+            }
+
+
+        }
         public class MyMouseMotionListener implements MouseMotionListener {
 
             @Override
@@ -123,6 +141,7 @@ import java.awt.image.BufferStrategy;
             }
         }
 
+
         public class MyMouseListener implements MouseListener {
 
             @Override
@@ -130,6 +149,8 @@ import java.awt.image.BufferStrategy;
                 if (hitbox.contains(mousex,mousey)) {
                     hitbox.y = (int)(Math.random() * 350);
                     hitbox.x = (int)(Math.random() * 550);
+                    counter++;
+                    time = 0;
                 }
             }
 
